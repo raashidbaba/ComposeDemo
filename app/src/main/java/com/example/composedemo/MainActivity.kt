@@ -167,9 +167,9 @@ fun TextUpdate() {
         }*/
     Column {
         ListView(imgId = R.drawable.baseline_heart_broken_24, name = "john doe", occupation ="developer" )
-        ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="developer" )
-        ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="developer" )
-        ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="developer" )
+        ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="tech lead" )
+        ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="QA" )
+        ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="manager" )
         ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="developer" )
     }
 
