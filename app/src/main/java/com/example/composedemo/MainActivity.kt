@@ -8,13 +8,16 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
@@ -26,6 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -38,6 +42,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composedemo.ui.theme.ComposeDemoTheme
+import com.example.composedemo.ui.theme.ScreenComposeOnly
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +52,10 @@ class MainActivity : ComponentActivity() {
 //            Text(text = "hello josh")
 //            SayCheesy()
 //            TextUpdate()
-            ListView(R.drawable.baseline_heart_broken_24,"joh doe","software engineer")
+//            ListView(R.drawable.baseline_heart_broken_24,"joh doe","software engineer")
+//            TextComp()
+            val b = ScreenComposeOnly()
+            b.PreviewFun()
 
 
         }
@@ -133,27 +141,27 @@ fun TextUpdate() {
 
 }*/
 
-@Preview(showBackground = true, name = "a1", showSystemUi = true, widthDp = 300, heightDp = 500)
+/*@Preview(showBackground = true, name = "a1", showSystemUi = true, widthDp = 300, heightDp = 500)
 @Composable
 fun TextUpdate() {
-    /* Column(
+    *//* Column(
          //this will take max space bw two text views.
          verticalArrangement = Arrangement.SpaceBetween,
          horizontalAlignment = Alignment.CenterHorizontally
      ) {
          Text(text = "first", fontSize = 34.sp)
          Text(text = "second", fontSize = 24.sp)
-     }*/
+     }*//*
 
-    /*  Row(
+    *//*  Row(
           horizontalArrangement = Arrangement.SpaceBetween,
           verticalAlignment = Alignment.Bottom
       ) {
           Text(text = "first", fontSize = 34.sp)
           Text(text = "second", fontSize = 24.sp)
-      }*/
+      }*//*
 
-    /*
+    *//*
         Box(contentAlignment = Alignment.Center) {
             Image(
                 painter = painterResource(id = R.drawable.baseline_heart_broken_24),
@@ -164,7 +172,7 @@ fun TextUpdate() {
                 painter = painterResource(id = R.drawable.baseline_arrow_back_24),
                 contentDescription = ""
             )
-        }*/
+        }*//*
     Column {
         ListView(imgId = R.drawable.baseline_heart_broken_24, name = "john doe", occupation ="developer" )
         ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="tech lead" )
@@ -173,10 +181,10 @@ fun TextUpdate() {
         ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="developer" )
     }
 
-}
+}*/
 
 
-@Composable
+/*@Composable
 fun ListView(imgId:Int,name:String,occupation:String) {
 
     Row (Modifier.padding(8.dp)){
@@ -191,7 +199,29 @@ fun ListView(imgId:Int,name:String,occupation:String) {
         }
     }
 
-}
+}*/
+
+
+
+/*@Preview(showBackground = true, name = "a1", showSystemUi = true, widthDp = 500, heightDp  =500)
+@Composable
+fun TextComp(){
+    Text(text = "hello print",
+        color = Color.White,
+        modifier = Modifier.clickable { }
+            .background(Color.Blue)
+            .size(400.dp)
+            .padding(36.dp)
+            .border(4.dp, Color.Red)
+            .clip(CircleShape)
+            .background(Color.Yellow)
+
+
+
+
+
+        )
+}*/
 
 
 
