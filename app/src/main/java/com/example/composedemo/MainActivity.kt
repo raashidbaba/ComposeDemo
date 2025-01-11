@@ -1,6 +1,7 @@
 package com.example.composedemo
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -29,6 +30,7 @@ class MainActivity : ComponentActivity() {
 //            b.PreviewFun()
             val c = StateExample()
            c.NotificationsPreview()
+           Toast.makeText(this,"check email",Toast.LENGTH_SHORT).show()
 
 
         }
