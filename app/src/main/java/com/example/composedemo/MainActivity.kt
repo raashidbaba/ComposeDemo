@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
             val c = StateExample()
            c.NotificationsPreview()
            Toast.makeText(this,"check email",Toast.LENGTH_SHORT).show()
+           Toast.makeText(this,"email fixed",Toast.LENGTH_SHORT).show()
 
 
         }
