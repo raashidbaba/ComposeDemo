@@ -1,9 +1,12 @@
 package com.example.composedemo
 
+import android.app.appsearch.SearchResults
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,8 +25,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlendMode
@@ -47,7 +53,16 @@ class MainActivity : ComponentActivity() {
 //            Text(text = "hello josh")
 //            SayCheesy()
 //            TextUpdate()
-            ListView(R.drawable.baseline_heart_broken_24,"joh doe","software engineer")
+//            ListView(R.drawable.baseline_heart_broken_24,"joh doe","software engineer")
+
+//                WelcomeScreen("raash")
+//                    Counter()
+//                    LoginScreen()
+                       // SearchBar()
+//                         LightBulb()
+
+                            Room()
+
 
 
         }
@@ -55,143 +70,170 @@ class MainActivity : ComponentActivity() {
 }
 
 
+//basic exercise 1
 @Composable
-fun SayCheesy(name: String = "cheesy") {
-    Text(
-        text = "hello $name",
-        fontStyle = FontStyle.Italic,
-        fontWeight = FontWeight.SemiBold,
-        color = Color.Red,
-        fontSize = 30.sp,
-        textAlign = TextAlign.Left
-    )
+fun WelcomeScreen(userName: String){
+    Box(modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+        ){
+        Text(
+            text = "hello $userName",
+            fontSize = 30.sp,
+            fontStyle = FontStyle.Italic,
+            fontWeight = FontWeight.SemiBold,
+            color = Color.Blue,
+            textAlign = TextAlign.Center
+        )
+    }
+    }
+
+
+
+@Preview()
+@Composable
+fun WelcomeScreenPreview(){
+    WelcomeScreen("raas")
 }
 
 
-//text composable
-/*
-@Preview(showBackground = true, name = "a1", showSystemUi = true, widthDp = 500, heightDp = 500)
+
+
+//exercise 2 -> State and Recomposition
+
+//this wont work
 @Composable
-fun PreviewFunction() {
-    SayCheesy("world")
-}*/
+fun Counter() {
+    // This resets to 0 on every recomposition!
+    var count = 0
 
-
-//image composable
-/*@Preview(showBackground = true, name = "a1", showSystemUi = true, widthDp = 300, heightDp = 500)
-@Composable
-fun PreviewFunction() {
-    Image(painter = painterResource(id = R.drawable.baseline_heart_broken_24),
-        contentDescription ="Dummy heart break",
-        colorFilter = ColorFilter.tint(Color.Blue),
-        contentScale = ContentScale.Crop,
-        alignment = Alignment.Center
-        )
-}*/
-
-//button composable
-/*
-@Preview(showBackground = true, name = "a1", showSystemUi = true, widthDp = 300, heightDp = 100)
-@Composable
-fun PreviewFunction() {
-   Button(onClick = {}, colors = ButtonDefaults.buttonColors(
-       contentColor = Color.Yellow,
-       containerColor = Color.Blue
-       ), enabled = true
-   ) {
-       Text(text = "click me")
-       Image(painter = painterResource(id = R.drawable.baseline_heart_broken_24), contentDescription = "d2")
-
-   }
-}*/
-
-
-//Tex-input composable
-/*
-@Preview(showBackground = true, name = "a1", showSystemUi = true, widthDp = 300, heightDp = 100)
-@Composable
-fun PreviewFunction() {
-   TextField(
-       value = "hello world",
-       onValueChange = {},
-       label = {(Text(text = "enter message"))},
-       placeholder = {}
-   )
-}*/
-
-
-/*@Composable
-fun TextUpdate() {
-    val state = remember {
-        mutableStateOf("")
+    Button(onClick = { count++ }) {
+        Text("Count: $count")
     }
-    TextField(
-        value = state.value,
-        onValueChange = { state.value = it },
-        label = { Text("Label") }
-    )
-
-}*/
-
-@Preview(showBackground = true, name = "a1", showSystemUi = true, widthDp = 300, heightDp = 500)
-@Composable
-fun TextUpdate() {
-    /* Column(
-         //this will take max space bw two text views.
-         verticalArrangement = Arrangement.SpaceBetween,
-         horizontalAlignment = Alignment.CenterHorizontally
-     ) {
-         Text(text = "first", fontSize = 34.sp)
-         Text(text = "second", fontSize = 24.sp)
-     }*/
-
-    /*  Row(
-          horizontalArrangement = Arrangement.SpaceBetween,
-          verticalAlignment = Alignment.Bottom
-      ) {
-          Text(text = "first", fontSize = 34.sp)
-          Text(text = "second", fontSize = 24.sp)
-      }*/
-
-    /*
-        Box(contentAlignment = Alignment.Center) {
-            Image(
-                painter = painterResource(id = R.drawable.baseline_heart_broken_24),
-                contentDescription = "",
-                colorFilter = ColorFilter.tint(Color.Red)
-            )
-            Image(
-                painter = painterResource(id = R.drawable.baseline_arrow_back_24),
-                contentDescription = ""
-            )
-        }*/
-    Column {
-        ListView(imgId = R.drawable.baseline_heart_broken_24, name = "john doe", occupation ="developer" )
-        ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="developer" )
-        ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="developer" )
-        ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="developer" )
-        ListView(imgId = R.drawable.baseline_arrow_back_24, name = "john doe", occupation ="developer" )
-    }
-
 }
 
 
 @Composable
-fun ListView(imgId:Int,name:String,occupation:String) {
+fun Counter1(){
+    val count =  remember { mutableStateOf(0) }
 
-    Row (Modifier.padding(8.dp)){
-        Image(
-            painter = painterResource(id = imgId),
-            contentDescription = "",
-            modifier = Modifier.size(40.dp)
-        )
-        Column {
-            Text(text = name, fontWeight = FontWeight.Bold)
-            Text(text = occupation, fontWeight = FontWeight.Thin, fontSize = 12.sp)
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        Button(onClick = {count.value++ }) {
+            Text("clicked ${count.value}")
         }
     }
+}
+
+
+
+//remember vs rememberSaveable
+//remember: Preserves state during recomposition but lost on configuration changes
+//rememberSaveable: Persists across configuration changes using SavedStateHandle
+
+
+@Composable
+fun LoginScreen(){
+    val username = remember { mutableStateOf("") }
+    val passWord = rememberSaveable { mutableStateOf("") }
+
+
+        Column(modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+            TextField(value = username.value, onValueChange = { username.value = it })
+            TextField(value = passWord.value, onValueChange = { passWord.value = it })        }
+
+
 
 }
+
+
+
+
+
+//State Hoisting
+
+
+// BAD - Switch trapped inside the lightbulb
+@Composable
+fun LightBulb(){
+        var isOn by remember { mutableStateOf(false) }
+
+        Button(onClick = {isOn =! isOn}) {
+            if (isOn){
+                Text("💡 Light is ON")
+            }else{
+                Text("💡 Light is OFF")
+            }
+
+        }
+
+}
+
+
+@Composable
+fun LightBulb(
+    isOn: Boolean,
+    toggle: () -> Unit
+){
+        Button(onClick = toggle) {
+            if (isOn){
+                Text("💡 Light is ON")
+            }else{
+                Text("⚫ Light is OFF")
+            }
+        }
+}
+
+
+@Composable
+fun Room(){
+
+    var isLightOn by remember { mutableStateOf(false) }
+
+    LightBulb(
+        isLightOn,
+        toggle = {isLightOn = !isLightOn}
+
+    )
+
+    if (isLightOn) {
+        Text("💰 Electricity bill: $10")
+    } else {
+        Text("💰 Electricity bill: $0")
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
