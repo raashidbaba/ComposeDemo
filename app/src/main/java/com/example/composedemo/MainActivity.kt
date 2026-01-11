@@ -3,6 +3,7 @@ package com.example.composedemo
 import android.app.appsearch.SearchResults
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -62,6 +63,7 @@ class MainActivity : ComponentActivity() {
 //                         LightBulb()
 
                             Room()
+            Log.d("TAG", "onCreate: ")
 
 
 
